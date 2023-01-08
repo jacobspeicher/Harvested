@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _camera = Camera.main;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     void Start()
     {
@@ -67,6 +69,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGravity()
     {
+
+
+        if (_controller.isGrounded && !_isJumping)
+            _yVelocity = -.01f; //Keeps player grounded without quickdrop
+
         if (_controller.isGrounded && _isJumping)
         {
             _isJumping = false;
