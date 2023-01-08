@@ -71,8 +71,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Assets folder
+# Assets
 /[Aa]ssets/[Aa]ssets/
+/[Aa]ssets/Player/Character
 
 # Windows thumbnail cache files
 Thumbs.db
