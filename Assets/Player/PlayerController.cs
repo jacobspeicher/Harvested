@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterController _controller;
     [SerializeField] private Camera _camera;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject _character;
 
     [Header("Movement Values")]
     [SerializeField] private float _speed;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _directionInput;
     private float _currentAngle;
     private float _currentAngleVelocity;
+
     private bool _isJumping;
     private bool _isRunning;
 
@@ -36,9 +39,11 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _animator = _character.GetComponent<Animator>();
     }
     void Start()
     {
+        Debug.Log(_animator);
     }
 
     private void Update()
@@ -58,12 +63,23 @@ public class PlayerController : MonoBehaviour
 
         if (_direction.magnitude >= 0.1f)
         {
+            if (_animator != null)
+            {
+                _animator.SetBool("Moving", true);
+            }
             float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
             _currentAngle = Mathf.SmoothDampAngle(_currentAngle, targetAngle, ref _currentAngleVelocity, _rotationSmoothTime);
             transform.rotation = Quaternion.Euler(0, _currentAngle, 0);
             Vector3 rotatedMovement = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
 
             _controller.Move(rotatedMovement * _speed * Time.deltaTime);
+        }
+        else
+        {
+            if (_animator != null)
+            {
+                _animator.SetBool("Moving", false);
+            }
         }
     }
 
@@ -90,6 +106,11 @@ public class PlayerController : MonoBehaviour
         {
             _yVelocity = Mathf.Sqrt(_jumpHeight * 2f * _gravity);
             _isJumping = true;
+            if (_animator != null)
+            {
+                Debug.Log("should jump");
+                _animator.SetTrigger("Jump");
+            }
         }
     }
 
@@ -99,23 +120,26 @@ public class PlayerController : MonoBehaviour
         {
             _speed *= _runModifier;
             _isRunning = true;
+            if (_animator != null)
+            {
+                _animator.SetFloat("Speed", 1);
+            }
         }
         if (context.canceled && _isRunning)
         {
             _speed /= _runModifier;
             _isRunning = false;
+            if (_animator != null)
+            {
+                _animator.SetFloat("Speed", 0);
+            }
         }
     }
 
     public void MovePlayer(Transform inTransform)
     {
-        Debug.Log("orig pos : " + transform.position);
-        Debug.Log("in transform : " + inTransform.position);
-        //transform.position = new Vector3(inTransform.position.x, inTransform.position.y, inTransform.position.z);
-        //_controller.transform.position = inTransform.position;
         _controller.enabled = false;
         transform.position = inTransform.position;
         _controller.enabled = true;
-        Debug.Log("player pos : " + transform.position);
     }
 }
