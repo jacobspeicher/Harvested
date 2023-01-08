@@ -99,4 +99,16 @@ public class PlayerController : MonoBehaviour
             _isRunning = false;
         }
     }
+
+    public void MovePlayer(Transform inTransform)
+    {
+        Debug.Log("orig pos : " + transform.position);
+        Debug.Log("in transform : " + inTransform.position);
+        //transform.position = new Vector3(inTransform.position.x, inTransform.position.y, inTransform.position.z);
+        //_controller.transform.position = inTransform.position;
+        _controller.enabled = false;
+        transform.position = inTransform.position;
+        _controller.enabled = true;
+        Debug.Log("player pos : " + transform.position);
+    }
 }
