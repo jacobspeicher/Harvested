@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _direction;
     private float _yVelocity;
 
+    private bool footstepsPlaying;
+
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -63,6 +65,12 @@ public class PlayerController : MonoBehaviour
 
         if (_direction.magnitude >= 0.1f)
         {
+            if (!footstepsPlaying)
+            {
+                AudioManager.Instance.Play("Footsteps");
+                footstepsPlaying = true;
+            }
+
             if (_animator != null)
             {
                 _animator.SetBool("Moving", true);
@@ -76,6 +84,12 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if (footstepsPlaying)
+            {
+                AudioManager.Instance.Stop("Footsteps");
+                footstepsPlaying = false;
+            }
+
             if (_animator != null)
             {
                 _animator.SetBool("Moving", false);
