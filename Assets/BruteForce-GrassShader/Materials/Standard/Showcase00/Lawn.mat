@@ -60,7 +60,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 4e1d764fa7e47f34eae88e37253c2542, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 12, y: 25}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -102,11 +102,11 @@ Material:
     - _GrassCut: 0
     - _GrassSaturation: 2.25
     - _GrassShading: 0.026
-    - _GrassThinness: 0.79
+    - _GrassThinness: 0.94
     - _GrassThinnessIntersection: 1.01
     - _LightIntensity: 1
     - _Metallic: 0
-    - _MinimumNumberStacks: 2
+    - _MinimumNumberStacks: 10.96
     - _Mode: 0
     - _NearCameraSmoosh: 0.5
     - _NoisePower: 4
