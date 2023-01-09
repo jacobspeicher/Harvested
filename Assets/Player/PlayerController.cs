@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     private float _yVelocity;
 
     private bool footstepsPlaying;
+    private bool acceptingInputs;
+
+    public GameController _gameController;
 
     private void Awake()
     {
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _animator = _character.GetComponent<Animator>();
+        acceptingInputs = true;
     }
     void Start()
     {
@@ -50,7 +54,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Movement();
+        _direction = Vector3.zero;
+        if (acceptingInputs) Movement();
         HandleGravity();
     }
 
@@ -116,14 +121,17 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.started && _controller.isGrounded)
+        if (acceptingInputs)
         {
-            _yVelocity = Mathf.Sqrt(_jumpHeight * 2f * _gravity);
-            _isJumping = true;
-            if (_animator != null)
+            if (context.started && _controller.isGrounded)
             {
-                Debug.Log("should jump");
-                _animator.SetTrigger("Jump");
+                _yVelocity = Mathf.Sqrt(_jumpHeight * 2f * _gravity);
+                _isJumping = true;
+                if (_animator != null)
+                {
+                    Debug.Log("should jump");
+                    _animator.SetTrigger("Jump");
+                }
             }
         }
     }
@@ -155,5 +163,21 @@ public class PlayerController : MonoBehaviour
         _controller.enabled = false;
         transform.position = inTransform.position;
         _controller.enabled = true;
+    }
+
+    public void StartCutscene(string scene)
+    {
+        acceptingInputs = false;
+        if (scene.Equals("Dogs"))
+        {
+            _animator.SetTrigger("FieldReset");
+        }
+    }
+
+    public void sendPlayerToStart()
+    {
+        _animator.SetTrigger("PlayerToIdle");
+        _gameController.SendPlayerToStart();
+        acceptingInputs = true;
     }
 }

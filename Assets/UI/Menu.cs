@@ -42,7 +42,7 @@ public class Menu : MonoBehaviour
     IEnumerator startGame()
     {
         yield return new WaitForEndOfFrame();
-        //AudioManager.Instance.Stop("MenuMusic");
+        AudioManager.Instance.Stop("MenuMusic");
         //AudioManager.Instance.gameObject.GetComponentInChildren<MusicHandler>().playMusic();
         MainMenu.SetActive(false);
 

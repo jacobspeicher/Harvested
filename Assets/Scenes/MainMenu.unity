@@ -717,6 +717,18 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: Footsteps
+    clip: {fileID: 8300000, guid: 9a54adc4ccc92694abd0148463ac617d, type: 3}
+    loop: 1
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: DogsBarking
+    clip: {fileID: 8300000, guid: 1383f65a6d93d5440ac2f8178e800710, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
 --- !u!4 &1029454838
 Transform:
   m_ObjectHideFlags: 0
