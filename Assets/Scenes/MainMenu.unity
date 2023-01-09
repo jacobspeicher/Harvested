@@ -712,10 +712,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: MenuMusic
-    clip: {fileID: 8300000, guid: 326eb6a9156c2064793774a4dbc27cf8, type: 3}
+    clip: {fileID: 8300000, guid: be56b5a5c675cc04cb5256ed8d38e8bc, type: 3}
     loop: 1
     volume: 1
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
 --- !u!4 &1029454838
 Transform:

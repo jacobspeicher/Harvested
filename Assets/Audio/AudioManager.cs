@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     void Start()
     {
+        print("Starting sound manager");
         if(Instance != null)
         {
             Debug.Log("Tried to create a duplicate AudioManager");
@@ -26,12 +27,14 @@ public class AudioManager : MonoBehaviour
                 s.source.volume = s.volume;
                 s.source.pitch = s.pitch;
             }
+            print("Done creating clips");
         }
 
     }
 
     public void Play(string name)
     {
+        print("Should play sound" + name);
         Sound s = Array.Find(sounds, s => s.name.Equals(name));
         if(s == null)
         {
@@ -40,6 +43,7 @@ public class AudioManager : MonoBehaviour
         }
         if (!s.source.loop) s.source.PlayOneShot(s.clip);
         else s.source.Play();
+        print("Playing sound " + name);
     }
 
     public void Stop(string name)
