@@ -19,6 +19,14 @@ public class Menu : MonoBehaviour
         }
         catch { }
         */
+        StartCoroutine(menuMusic());
+    }
+
+    IEnumerator menuMusic()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        AudioManager.Instance.Play("MenuMusic");
     }
 
     public void PlayButton()
@@ -38,7 +46,7 @@ public class Menu : MonoBehaviour
         //AudioManager.Instance.gameObject.GetComponentInChildren<MusicHandler>().playMusic();
         MainMenu.SetActive(false);
 
-        SceneManager.LoadScene("MainLevel");
+        SceneManager.LoadScene("Cornfield");
     }
 
     public void Credits()
