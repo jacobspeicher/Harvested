@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!footstepsPlaying)
             {
-                AudioManager.Instance.Play("Footsteps");
+                //AudioManager.Instance.Play("Footsteps");
                 footstepsPlaying = true;
             }
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         {
             if (footstepsPlaying)
             {
-                AudioManager.Instance.Stop("Footsteps");
+                //AudioManager.Instance.Stop("Footsteps");
                 footstepsPlaying = false;
             }
 
