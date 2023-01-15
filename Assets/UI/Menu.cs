@@ -45,7 +45,7 @@ public class Menu : MonoBehaviour
         AudioManager.Instance.Stop("MenuMusic");
         //AudioManager.Instance.gameObject.GetComponentInChildren<MusicHandler>().playMusic();
         MainMenu.SetActive(false);
-
+        AudioManager.Instance.Play("Level1Music");
         SceneManager.LoadScene("Cornfield");
     }
 

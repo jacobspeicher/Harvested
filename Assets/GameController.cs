@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private PlayerController _player;
     [SerializeField] private GameObject _start;
+    [SerializeField] private FarmerController _farmer;
 
     [SerializeField] private GameObject cutscenePoint;
 
@@ -22,5 +23,16 @@ public class GameController : MonoBehaviour
     {
         _player.MovePlayer(_start.transform);
         
+    }
+
+    public void StartFarmerShooting()
+    {
+        _farmer.StartShooting();
+    }
+
+    public void KillPlayer()
+    {
+        AudioManager.Instance.Play("Gunshot");
+        _player.Kill();
     }
 }

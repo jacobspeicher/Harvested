@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool acceptingInputs;
 
     public GameController _gameController;
+    public GameObject DeathPoint;
 
     private void Awake()
     {
@@ -172,6 +174,28 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger("FieldReset");
         }
+        if (scene.Equals("GettingShot"))
+        {
+            acceptingInputs = false;
+            //_animator.SetTrigger("GoGetShot");
+            StartCoroutine(GettingShot());
+        }
+    }
+
+    IEnumerator GettingShot()
+    {
+        _animator.SetBool("Moving", true);
+        for(Vector3 dist = Vector3.one; dist.magnitude > 0.2f; dist = (DeathPoint.transform.position - transform.position))
+        {
+            _controller.Move(dist.normalized * 2 * Time.deltaTime);
+            //print("Walking there");
+            yield return new WaitForEndOfFrame();
+        }
+        print("done walking");
+        AudioManager.Instance.Stop("Footsteps");
+        _animator.SetBool("Moving", false);
+        _animator.SetTrigger("Stumble");
+        _gameController.StartFarmerShooting();
     }
 
     public void sendPlayerToStart()
@@ -179,5 +203,24 @@ public class PlayerController : MonoBehaviour
         _animator.SetTrigger("PlayerToIdle");
         _gameController.SendPlayerToStart();
         acceptingInputs = true;
+    }
+
+    public void Kill()
+    {
+        StartCoroutine(KillPlayer());
+    }
+
+    public GameObject deathWindow;
+
+    IEnumerator KillPlayer()
+    {
+        Color col = new Color(0, 0, 0, 0);
+        for (int i = 0; i <= 100; i++)
+        {
+            col = new Color(0, 0, 0, Mathf.Lerp(0, 1, i / 100));
+            deathWindow.GetComponent<Image>().color = col;
+            yield return new WaitForEndOfFrame();
+        }
+        deathWindow.GetComponent<DeathWindow>().DisplayElements();
     }
 }
