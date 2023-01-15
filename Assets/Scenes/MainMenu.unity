@@ -731,7 +731,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Level1Music
     clip: {fileID: 8300000, guid: 485fca60c3b66af45a8fcbec516e4ba2, type: 3}
-    loop: 0
+    loop: 1
     volume: 0.499
     pitch: 1
     source: {fileID: 0}

@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!footstepsPlaying)
             {
-                //AudioManager.Instance.Play("Footsteps");
+                AudioManager.Instance.Play("Footsteps");
                 footstepsPlaying = true;
             }
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         {
             if (footstepsPlaying)
             {
-                //AudioManager.Instance.Stop("Footsteps");
+                AudioManager.Instance.Stop("Footsteps");
                 footstepsPlaying = false;
             }
 
@@ -106,8 +106,6 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGravity()
     {
-
-
         if (_controller.isGrounded && !_isJumping)
             _yVelocity = -.01f; //Keeps player grounded without quickdrop
 
