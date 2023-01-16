@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _character;
 
-    [Header("Movement Values")]
+    /*[Header("Movement Values")]
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _rotationSmoothTime;
@@ -35,10 +35,11 @@ public class PlayerController : MonoBehaviour
     private float _yVelocity;
 
     private bool footstepsPlaying;
-    private bool acceptingInputs;
+    private bool acceptingInputs;*/
 
     public GameController _gameController;
     public GameObject DeathPoint;
+    public PlayerMovement playerMovement;
 
     private void Awake()
     {
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _animator = _character.GetComponent<Animator>();
-        acceptingInputs = true;
+        playerMovement.acceptingInputs = true;
     }
     void Start()
     {
@@ -56,12 +57,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _direction = Vector3.zero;
+        /*_direction = Vector3.zero;
         if (acceptingInputs) Movement();
-        HandleGravity();
+        HandleGravity();*/
     }
 
-    public void GetMovementValues(InputAction.CallbackContext context)
+    /*public void GetMovementValues(InputAction.CallbackContext context)
     {
         _directionInput = context.ReadValue<Vector2>();
     }
@@ -156,7 +157,7 @@ public class PlayerController : MonoBehaviour
                 _animator.SetFloat("Speed", 0);
             }
         }
-    }
+    }*/
 
     public void MovePlayer(Transform inTransform)
     {
@@ -167,14 +168,14 @@ public class PlayerController : MonoBehaviour
 
     public void StartCutscene(string scene)
     {
-        acceptingInputs = false;
+        playerMovement.acceptingInputs = false;
         if (scene.Equals("Dogs"))
         {
             _animator.SetTrigger("FieldReset");
         }
         if (scene.Equals("GettingShot"))
         {
-            acceptingInputs = false;
+            playerMovement.acceptingInputs = false;
             //_animator.SetTrigger("GoGetShot");
             StartCoroutine(GettingShot());
         }
@@ -200,7 +201,7 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetTrigger("PlayerToIdle");
         _gameController.SendPlayerToStart();
-        acceptingInputs = true;
+        playerMovement.acceptingInputs = true;
     }
 
     public void Kill()
