@@ -219,6 +219,7 @@ public class PlayerController : MonoBehaviour
             deathWindow.GetComponent<Image>().color = col;
             yield return new WaitForEndOfFrame();
         }
-        deathWindow.GetComponent<DeathWindow>().DisplayElements();
+        //deathWindow.GetComponent<DeathWindow>().DisplayElements();
+        _gameController.NextLevel();
     }
 }

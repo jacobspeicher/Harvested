@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -34,5 +35,10 @@ public class GameController : MonoBehaviour
     {
         AudioManager.Instance.Play("Gunshot");
         _player.Kill();
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("Farmhouse");
     }
 }
