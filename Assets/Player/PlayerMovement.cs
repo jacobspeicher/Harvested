@@ -195,6 +195,7 @@ public class PlayerMovement : MonoBehaviour
             if (_animator != null)
             {
                 _animator.SetFloat("Speed", 1);
+                _animator.SetFloat("WalkingMultiplier", 1.0f);
             }
         }
 
@@ -205,6 +206,7 @@ public class PlayerMovement : MonoBehaviour
             if (_animator != null)
             {
                 _animator.SetFloat("Speed", 0);
+                _animator.SetFloat("WalkingMultiplier", 1.3f);
             }
         }
     }
