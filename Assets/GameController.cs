@@ -14,10 +14,16 @@ public class GameController : MonoBehaviour
     public void ResetPlayer()
     {
         Debug.Log("reset player");
-        //_player.MovePlayer(cutscenePoint.transform);
-        _player.StartCutscene("Dogs");
-        AudioManager.Instance.Play("DogsBarking");
-        
+        if (SceneManager.GetActiveScene().name == "Cornfield")
+        {
+            //_player.MovePlayer(cutscenePoint.transform);
+            _player.StartCutscene("Dogs");
+            AudioManager.Instance.Play("DogsBarking");
+        }
+        if (SceneManager.GetActiveScene().name == "Basement")
+        {
+            _player.sendPlayerToStart();
+        }
     }
 
     public void SendPlayerToStart()

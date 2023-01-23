@@ -49,8 +49,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(_character.transform.position);
-        Debug.Log(Vector3.down * 0.1f);
+        //Debug.Log(_character.transform.position);
+        //Debug.Log(Vector3.down * 0.1f);
     }
 
     // Update is called once per frame
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         float scale = transform.localScale.y;
-        Debug.Log("scale : " + scale);
+        //Debug.Log("scale : " + scale);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_character.transform.position + (Vector3.up * 0.5f * scale), 0.5f * scale);
     }
